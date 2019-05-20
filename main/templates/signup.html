@@ -1,0 +1,38 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>Instagram</title>
+</head>
+<body>
+  <div class="container">
+  <div class="card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" alt="Ig img" height="80px" width="400px">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="move">
+          <form class="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" name="button">Sign Up</button>
+            <div class="cards">
+              <h6>Allready have an account? <a href="/accounts/login">LOGIN</a> </h6>
+            </div>
+            <h6>Get the App</h6>
+            <div class="img">
+              <a href="https://play.google.com/store?hl=en"><img src="https://neversinkmediagroup.com/wabt/wp-content/uploads/sites/7/2018/10/Google-Play-Store-Logo.png" alt="Google play" height="100px" width="150px"></a>
+              <a href="https://www.apple.com/lae/ios/app-store/"><img src="https://lh3.googleusercontent.com/E0tCAmPUfK6TNphLns-ZMZOkOD4Sqz0bS4sEhqf4959UMoC7ZjZXt6neaHDBzWpyTcnQdn9kZTk1vNYU1tSrosQNPYxSOmT6WtVS6A" alt="app store" height="70px" width="150px"></a>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+    </div>
+</body>
+
+</html>
