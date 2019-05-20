@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ block.super}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="index">
+      <div class="col-md-8">
+        <img src="https://instagram.com/static/images/homepage/home-phones.png/43cc71bb1b43.png" alt="instagram" height="550px" width="370px">
+      </div>
+      <div class="col-md-4">
+        <form class="" method="post">
+          {% csrf_token %}
+          {{form}}
+          <button type="submit" name="button">Sign Up</button>
+        </form>]
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
