@@ -55,19 +55,22 @@ def profile_index(request):
     return render(request,'profile.html', locals())
 
 
-def update_index(request):
-    # all_profile = Profile.objects.all()
-    profile = Profile.objects.get(user_id = request.user)
+def edit(request):
     if request.method == 'POST':
-        form = UploadForm(request.POST,request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
+        print(request.FILES)
+        new_profile = ProfileForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
+        if new_profile.is_valid():
+            new_profile.save()
+            print(new_profile.fields)
+            # print(new_profile.fields.profile_picture)
+            return redirect('myaccount')
     else:
-        form  = ProfileForm()
-
-    return render(request,'update.html', locals())
+        new_profile = ProfileForm(instance=request.user.profile)
+    return render(request, 'edit.html', locals())
 
 def togglefollow(request, user_id):
     target = get_object_or_404(User, pk=user_id).profile
@@ -79,4 +82,13 @@ def like(request, post_id):
     post = get_object_or_404(Image, pk=Image_id)
     request.user.profile.like(post)
     return JsonResponse(post.count_likes, safe=False)
+
+def mine(request):
+    images = request.user.profile.posts.all()
+    user_object = request.user
+    user_images = user_object.profile.posts.all()
+    user_saved = [save.photo for save in user_object.profile.saves.all()]
+    user_liked = [like.photo for like in user_object.profile.mylikes.all()]
+    print(user_liked)
+    return render(request, 'myprofile.html', locals())\
 
