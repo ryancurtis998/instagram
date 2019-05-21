@@ -11,10 +11,7 @@ urlpatterns = [
     url(r'accounts/', include('django.contrib.auth.urls')),
     url(r'comments/',views.save_comment, name='comment'),
     url(r'profile/',views.profile_index, name='profile'),
-    url(r'update/',views.edit, name='edit'),
-    url(r'^follow_or_not/(?P<user_id>\d+)$', views.togglefollow, name='follow_or_not'),
-    url(r'^unlike/(?P<post_id>\d+)$', views.unlike, name='unlike'),
-    url(r'^like/(?P<post_id>\d+)$', views.like, name='like')
+    url(r'update/',views.update_index, name='update')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
