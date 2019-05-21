@@ -1,5 +1,3 @@
-from django.http import JsonResponse
-from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -55,46 +53,16 @@ def profile_index(request):
     return render(request,'profile.html', locals())
 
 
-def edit(request):
+def update_index(request):
+    # all_profile = Profile.objects.all()
+    profile = Profile.objects.get(user_id = request.user)
     if request.method == 'POST':
-        print(request.FILES)
-        new_profile = ProfileForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile
-        )
-        if new_profile.is_valid():
-            new_profile.save()
-            print(new_profile.fields)
-            # print(new_profile.fields.profile_picture)
-            return redirect('myaccount')
+        form = UploadForm(request.POST,request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
     else:
-        new_profile = ProfileForm(instance=request.user.profile)
-    return render(request, 'edit.html', locals())
+        form  = ProfileForm()
 
-def togglefollow(request, user_id):
-    target = get_object_or_404(User, pk=user_id).profile
-    request.user.profile.togglefollow(target)
-    response = [target.followers.count(),target.following.count()]
-    return JsonResponse(response, safe=False)
-
-def like(request, image_id):
-    post = get_object_or_404(Image, pk=image_id)
-    request.user.profile.like(post)
-    return JsonResponse(post.count_likes, safe=False)
-
-def mine(request):
-    images = request.user.profile.posts.all()
-    user_object = request.user
-    user_images = user_object.profile.posts.all()
-    user_saved = [save.photo for save in user_object.profile.saves.all()]
-    user_liked = [like.photo for like in user_object.profile.mylikes.all()]
-    print(user_liked)
-    return render(request, 'myprofile.html', locals())\
-
-def unlike(request, image_id):
-    post = get_object_or_404(Image, pk=image_id)
-    request.user.profile.unlike(post)
-    return JsonResponse(post.count_likes, safe=False)
-
-
+    return render(request,'update.html', locals())
