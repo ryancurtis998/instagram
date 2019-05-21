@@ -73,6 +73,3 @@ class Follows(models.Model):
     follower = models.ForeignKey(Profile, related_name='following')
 followee = models.ForeignKey(Profile, related_name='followers')
 
-class Likes(models.Model):
-    user = models.ForeignKey(Profile, related_name='mylikes')
-    photo = models.ForeignKey(photo, related_name='photolikes')

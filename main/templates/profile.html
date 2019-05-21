@@ -1,52 +1,52 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
-{% load utils %}
 {% block content %}
-<div class="row userbody">
-    <div id="userdetails" class="row col-12 mb-2">
-        <div class="col-sm-4">
-            <img src="{{user_object.profile.profile_picture.url}}" width="152" height="152" class="rounded-circle border userimage">
-        </div>
-        <div class="col-sm-8">
-            <div style="margin-bottom: 20px;">
-                <h3 style="vertical-align: middle">{{user_object.username}}</h3>
-                <button id="follow" class="editbtn {% if not isfollowing %}d-none{% endif %} btn-primary" onclick="togglefollow({{user_object.id}})">
-                    <span class="edittext">Follow</span>
-                </button>
-                <button id="follown" class="btn {% if isfollowing %}d-none{% endif %} followbtn" onclick="togglefollow({{user_object.id}})">
-                    <span class="edittext">Following</span>
-                </button>
-            </div>
-            <div style="margin-bottom: 11px;">
-                <span class="info"><strong>{{ user_object.profile.posts.count }}</strong> posts</span>
-                <span class="info"><strong id="followers">{{ user_object.profile.followers.count }}</strong> followers</span>
-                <span class="info"><strong id="following">{{ user_object.profile.following.count }}</strong> following</span>
-            </div>
-            <div>
-                <strong>{{ user_object.profile.Name }}</strong>
-            </div>
-            <div><span>{{ user_object.profile.bio }}</span></div>
-        </div>
-    </div>
-    <ul class="nav" id="my" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" href="#posts" data-toggle="tab" role="tab" aria-controls="posts" aria-selected="true">
-            Posts
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#liked" data-toggle="tab" role="tab" aria-controls="liked" aria-selected="false">
-            Liked
-        </a>
-      </li>
-    </ul>
-    <div class="tab-content row col-12" id="myContent">
-      <div class="tab-pane fade show active" id="posts" role="tabpanel">
-        {% include 'posts.html' with index_images=index_images %}
-      </div>
-      <div class="tab-pane fade" id="liked" role="tabpanel">
-          {% include 'posts.html' with index_images=user_liked %}
-      </div>
-    </div>
+{{ block.super}}
+{% load bootstrap4%}
+
+<br>
+<br>
+<br>
+<div class="container">
+
+  <img id="img" src="https://instagram.fnbo6-1.fna.fbcdn.net/vp/a4f4c31f85dae0dd994e15595d31dc3d/5D039885/t51.2885-19/s150x150/44757610_213963506024200_5106448499826753536_n.jpg?_nc_ht=instagram.fnbo6-1.fna.fbcdn.net" alt="">
+  <h1 id="profile_h">{{user.username}}</h1>
+  <button id="button_h" type="button" class="btn btn-outline-secondary"><a href="/update">Edit Profile</a></button>
+  <i id="fa_h" style="font-size:24px" class="fa fa-cog" aria-hidden="true"></i>
+  <div id="block">
+    <p id="p_h"><strong>2</strong> posts</p>
+    <p id="p_hh"><strong>1</strong> Followers<strong>1</strong> Following</p>
+
+    {% for prof in all_profile%}
+    <h4 id="p_hhh">{{prof.last_name}}</h4>
+      {% endfor %}
+<br>
+
+
+  </div>
+
 </div>
-{% endblock %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<form method='POST' enctype="multipart/form-data">
+  {% csrf_token %}
+  {%for fields in form%}
+  {{ fields }}
+  {%endfor%}
+  <button type="submit" name="button">upload</button>
+</form>
+
+</div>
+<div class="">
+  {%for de in images%}
+  <img src="{{de.image_path.url}}" alt="">
+  {%endfor%}
+
+</div>
+
+
+{%endblock%}

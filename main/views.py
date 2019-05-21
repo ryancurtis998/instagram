@@ -78,8 +78,8 @@ def togglefollow(request, user_id):
     response = [target.followers.count(),target.following.count()]
     return JsonResponse(response, safe=False)
 
-def like(request, post_id):
-    post = get_object_or_404(Image, pk=Image_id)
+def like(request, image_id):
+    post = get_object_or_404(Image, pk=image_id)
     request.user.profile.like(post)
     return JsonResponse(post.count_likes, safe=False)
 
@@ -91,4 +91,10 @@ def mine(request):
     user_liked = [like.photo for like in user_object.profile.mylikes.all()]
     print(user_liked)
     return render(request, 'myprofile.html', locals())\
+
+def unlike(request, image_id):
+    post = get_object_or_404(Image, pk=image_id)
+    request.user.profile.unlike(post)
+    return JsonResponse(post.count_likes, safe=False)
+
 
