@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
@@ -67,3 +68,15 @@ def update_index(request):
         form  = ProfileForm()
 
     return render(request,'update.html', locals())
+
+def togglefollow(request, user_id):
+    target = get_object_or_404(User, pk=user_id).profile
+    request.user.profile.togglefollow(target)
+    response = [target.followers.count(),target.following.count()]
+    return JsonResponse(response, safe=False)
+
+def like(request, post_id):
+    post = get_object_or_404(Image, pk=Image_id)
+    request.user.profile.like(post)
+    return JsonResponse(post.count_likes, safe=False)
+

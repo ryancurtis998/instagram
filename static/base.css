@@ -1,0 +1,76 @@
+.index{
+    margin-top: 70px;
+    margin-left: 230px;
+  }
+  #one{
+    position: relative;
+    left: 25%;
+  }
+  #two{
+    position: relative;
+    left: 10%;
+  }
+  #three{
+    position: relative;
+    left:500px;
+  }
+  span{
+    display: inline-block;
+  }
+  #margin{
+    margin-left: 20px;
+  }
+  #img{
+    position: relative;
+    left: 160px;
+    top: 50px;
+    border: 1px solid;
+    border-radius: 50%;
+  }
+  #profile_h{
+    position: relative;
+    left:45%;
+    bottom: 90px;
+  }
+  #button_h{
+    position: relative;
+    left:60%;
+    bottom: 140px;
+  }
+  #fa_h{
+    position: relative;
+    left:60.9%;
+    bottom: 140px;
+  }
+  #p_h{
+    position: relative;
+    left:45.4%;
+    bottom: 80px;
+  }
+  #p_hh{
+    position: relative;
+    left:55.4%;
+    bottom: 120px;
+    margin-bottom: 70px;
+  }
+  #p_hhh{
+    position: relative;
+    left:45.4%;
+    bottom: 120px;
+    margin-bottom: 70px;
+  }
+  #move{
+    padding: 50%;
+  }
+  .index{
+    background-color: #e8e8e8;
+  }
+  .cd{
+    margin: 70px;
+    margin-left: 440px;
+    margin-right: 440px;
+    box-shadow: -1px 1px 16px -1px rgba(0, 0, 0, 0.75);
+    text-align: center;
+    padding: 30px;
+    align-content: center;
+  }

@@ -57,3 +57,22 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+        
+    def togglefollow(self, profile):
+        if self.following.filter(followee=profile).count() == 0:
+            Follows(followee=profile, follower=self).save()
+            return True
+        else:
+            self.following.filter(followee=profile).delete()
+            return False
+        
+    def like(self, image_path):
+        if self.mylikes.filter(photo=image_path).count() == 0:
+            Likes(photo=image_path,user=self).save()
+class Follows(models.Model):
+    follower = models.ForeignKey(Profile, related_name='following')
+followee = models.ForeignKey(Profile, related_name='followers')
+
+class Likes(models.Model):
+    user = models.ForeignKey(Profile, related_name='mylikes')
+    photo = models.ForeignKey(photo, related_name='photolikes')
