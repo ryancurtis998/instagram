@@ -56,3 +56,25 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
+    
+def add_like(request):
+    post_pk = request.POST.get('post_pk')
+    post = Post.objects.get(pk=post_pk)
+    try:
+        like = Like(post=post, user=request.user)
+        like.save()
+        result = 1
+    except Exception as e:
+        like = Like.objects.get(post=post, user=request.user)
+        like.delete()
+        result = 0
+
+    return {
+            'result': result,
+            'post_pk': post_pk
+    }
+def get_number_of_likes(self):
+    return self.like_set.count()
+
+def get_number_of_comments(self):
+    return self.comment_set.count()       
