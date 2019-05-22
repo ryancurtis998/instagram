@@ -26,7 +26,7 @@ SECRET_KEY = 'i#6+to=rd!zjxt8^4s7)2!f#f&6kiol_-^21a=@%%klg#3gv1n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['herokudjangoapp.herokuapp.com']
+ALLOWED_HOSTS = ['instagram254.herokuapp.com']
 
 
 # Application definition
